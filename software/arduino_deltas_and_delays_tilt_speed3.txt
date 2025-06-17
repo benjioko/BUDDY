@@ -1,0 +1,7 @@
+const int dataLength = 10;
+int deltaSteps[dataLength] = {
+  -10, -29, -44, -56, -61, -62, -56, -44, -29, -9
+};
+unsigned int delayTimes[dataLength] = {
+  4159, 1437, 947, 742, 683, 672, 742, 947, 1437, 4622
+};
