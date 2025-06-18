@@ -10,8 +10,8 @@ import csv
 import numpy as np
 
 # === CONFIGURATION ===
-filepath = "/Users/benjaminokoronkwo/BUDDY/blender/motion_data_speed3.csv"  # Update if needed
-output_path = "arduino_deltas_and_delays_tilt_speed3.txt"
+filepath = "/Users/benjaminokoronkwo/BUDDY/data/motion/xtest1_data.csv"  # Update if needed
+output_path = "/Users/benjaminokoronkwo/BUDDY/data/processed/arduino_deltas_and_delays_x_speed1.txt"
 steps_per_rev = 1600  # For microstepping
 
 # === Read CSV and extract RotX (deg) data ===
