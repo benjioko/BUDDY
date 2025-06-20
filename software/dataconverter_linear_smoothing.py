@@ -22,12 +22,12 @@ The script outputs Arduino‑ready arrays: `deltaSteps[]` and `delayTimes[]`.
 # === USER CONFIGURATION ===
 
 # Path to CSV exported from Blender (must contain an "X (m)" column)
-filepath = "/Users/benjaminokoronkwo/BUDDY/data/motion/xtest6_data.csv"
+filepath = "/Users/benjaminokoronkwo/BUDDY/data/motion/xtestgantry_data.csv"
 
 # Folder + filename for the Arduino arrays
 output_folder = "/Users/benjaminokoronkwo/BUDDY/data/processed"
 os.makedirs(output_folder, exist_ok=True)
-output_path = os.path.join(output_folder, "xframe_test6.txt")
+output_path = os.path.join(output_folder, "xframe_testgantry.txt")
 
 # Mechanical parameters for Zeelo GT2 pulley system
 pulley_teeth = 20                     # Number of teeth on GT2 pulley
