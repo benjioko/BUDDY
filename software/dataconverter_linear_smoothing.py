@@ -31,9 +31,9 @@ output_path = os.path.join(output_folder, "xframe_testgantry.txt")
 
 # Mechanical parameters for Zeelo GT2 pulley system
 pulley_teeth = 20                     # Number of teeth on GT2 pulley
-belt_pitch_mm = 2                    # GT2 5M = 5mm pitch (NOT 2mm)
-circumference = pulley_teeth * belt_pitch_mm / 1000  # metres/rev → 0.1 m/rev
-steps_per_rev = 1600                 # 1/16 micro-stepping on 200-step NEMA 17
+belt_pitch_mm = 2                    # GT2 pulley gear pitch
+circumference = pulley_teeth * belt_pitch_mm / 1000  # in meters
+steps_per_rev = 1600                 # 1/8 micro-stepping on 200-step NEMA 17
 
 # === 1. LOAD CSV (TIME + X) ===
 times_s: list[float] = []
@@ -44,11 +44,13 @@ with open(filepath, "r") as f:
     for row in reader:
         times_s.append(float(row["Time (s)"]))
         positions_m.append(float(row["X (m)"]))
-
+        
+#error check
 if len(times_s) < 2:
     raise ValueError("CSV does not contain enough rows of data.")
 
-# === 2. OPTIONAL SINE EASING IN METRES ===
+# === 2. SINE EASING IN METRES ===
+#this makes the motion curves similar to Blender's
 start_x, end_x = positions_m[0], positions_m[-1]
 displacement   = end_x - start_x
 
