@@ -21,16 +21,21 @@ The script outputs Arduino‑ready arrays: `deltaSteps[]` and `delayTimes[]`.
 
 # === USER CONFIGURATION ===
 
-# Path to CSV exported from Blender (must contain an "X (m)" column)
+# === INPUT FILE: CSV exported from Blender ===
+# (must contain a column labeled "X (m)")
 filepath = "/Users/benjaminokoronkwo/BUDDY/data/motion/xtest_linear36_data.csv"
 
-# Auto-generate output filename from CSV input
+# === OUTPUT FILE: Auto-generated .txt in /processed ===
 output_folder = "/Users/benjaminokoronkwo/BUDDY/data/processed"
 os.makedirs(output_folder, exist_ok=True)
 
-# Get base name of input file, replace .csv with .txt
+# Strip .csv extension and optional '_data' suffix
 base_filename = os.path.splitext(os.path.basename(filepath))[0]
+if base_filename.endswith('_data'):
+    base_filename = base_filename[:-5]
+
 output_path = os.path.join(output_folder, f"{base_filename}.txt")
+
 
 
 # Mechanical parameters for Zeelo GT2 pulley system
