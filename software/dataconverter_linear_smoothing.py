@@ -23,7 +23,7 @@ The script outputs Arduino‑ready arrays: `deltaSteps[]` and `delayTimes[]`.
 
 # === INPUT FILE: CSV exported from Blender ===
 # (must contain a column labeled "X (m)")
-filepath = "/Users/benjaminokoronkwo/BUDDY/data/motion/xtest_linear36_data.csv"
+filepath = "/Users/benjaminokoronkwo/BUDDY/data/motion/tilt_x-axis_test4.csv"
 
 # === OUTPUT FILE: Auto-generated .txt in /processed ===
 output_folder = "/Users/benjaminokoronkwo/BUDDY/data/processed"
