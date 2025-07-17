@@ -28,10 +28,8 @@ output_path = os.path.join(output_folder, f"{base_filename}.txt")
 
 # === 2. USER CONFIGURATION ===
 #HARDWARE
-pulley_teeth = 36
-belt_pitch_mm = 2
-circumference = pulley_teeth * belt_pitch_mm / 1000
-steps_per_rev = 1600
+pulley_teeth = 36 #example of config, not used.
+belt_pitch_mm = 2 #example of config, not used.
 
 # === 3. SORT DATA INTO LISTS===
 #initialize lists here...
@@ -49,8 +47,8 @@ with open(filepath, "r") as f:
 
 # === 4. RUN FUNCTIONS FOR EACH DOF ===
 results_by_dof = {
-    "linX": linMotion(lin_x, times_s, pulley_teeth, belt_pitch_mm, steps_per_rev),
-    "rotX": rotMotion(rot_x, times_s, steps_per_rev)
+    "linX": linMotion(lin_x, times_s),
+    "rotX": rotMotion(rot_x, times_s)
 }
 
 # === 5. EXPORT HELPER FUNCTION ===
