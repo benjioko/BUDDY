@@ -30,7 +30,7 @@ def rotMotion(rot_data, times, steps_per_rev = 1600):
            delay_times_us (list[int]): Delay per step in microseconds, suitable for Arduino step control.
    """
     
-    # === Apply Sine-Based Easing to Rotation if there's motion ===
+    # === 1. SINE EASING IN METRES ===
     n = len(rot_data)
     rot_start, rot_end = rot_data[0], rot_data[-1]
     
@@ -41,13 +41,13 @@ def rotMotion(rot_data, times, steps_per_rev = 1600):
         ease = 0.5 - 0.5 * np.cos(np.linspace(0, np.pi, n))  # Sine ease-in-out
         eased_rot_x = [rot_start + (rot_end - rot_start) * e for e in ease]
     
-    # === Convert eased RotX to motor steps ===
+    # === 2. CONVERT ROTATION → STEPS ===
     def deg_to_steps(deg, steps_per_rev=1600):
         return int((deg / 360.0) * steps_per_rev)
     
     steps = [deg_to_steps(rx, steps_per_rev) for rx in eased_rot_x]
     
-    # === Compute delta steps and delay time based on velocity ===
+    # === 3. DELTA STEPS + PER‑STEP DELAYS (μs) ===
     delta_steps = []
     delay_times_us = []
     

@@ -32,9 +32,10 @@ def linMotion(lin_data, times, pulley_teeth = 36, belt_pitch_mm = 2, steps_per_r
             - delay_times_us (list[int]): Delay per step in microseconds for smooth timing.
     """
     
-    circumference = pulley_teeth * belt_pitch_mm / 1000  # in meters
+    # calculating circumfrence in meters
+    circumference = pulley_teeth * belt_pitch_mm / 1000
     
-    # === 2. SINE EASING IN METRES ===
+    # === 1. SINE EASING IN METRES ===
     #this makes the motion curves similar to Blender's
     start_x, end_x = lin_data[0], lin_data[-1]
     displacement   = end_x - start_x
@@ -45,13 +46,13 @@ def linMotion(lin_data, times, pulley_teeth = 36, belt_pitch_mm = 2, steps_per_r
         ease = 0.5 - 0.5 * np.cos(np.linspace(0, np.pi, len(lin_data)))
         eased_m = [start_x + displacement * e for e in ease]
     
-    # === 3. CONVERT METRES → STEPS ===
+    # === 2. CONVERT METRES → STEPS ===
     def m_to_steps(x_m: float, steps_rev: int = steps_per_rev, circ: float = circumference) -> int:
         return int(round((x_m / circ) * steps_rev))
     
     steps = [m_to_steps(x) for x in eased_m]
     
-    # === 4. DELTA STEPS + PER‑STEP DELAYS (μs) ===
+    # === 3. DELTA STEPS + PER‑STEP DELAYS (μs) ===
     delta_steps: list[int] = []
     delay_times_us: list[int] = []
     
