@@ -3,7 +3,7 @@
 """
 Created on Thu Jul 17 10:55:08 2025
 
-@author: benjaminokoronkwo
+@author: benjaminokoronkwo, ChatGPT
 """
 
 import numpy as np
@@ -12,16 +12,19 @@ def linMotion(lin_data, times, pulley_teeth = 36, belt_pitch_mm = 2, steps_per_r
     
     """
     Generates Arduino-ready step and delay arrays for linear motion based on 
-    Blender-exported X-axis translation data.
-
+    Blender-exported data.
+    
+    Process:
     Applies sine easing to input motion, converts to motor steps, and 
     calculates per-step delays to achieve smooth motion.
 
     Args:
-        lin_data (list[float]): Raw X-position data in meters.
+        lin_data (list[float]): Raw position data in meters.
         times (list[float]): Corresponding timestamps in seconds.
-        steps_per_rev (int, optional): Motor steps per full revolution. Default is 1600 (1/8 microstepping on 200-step motor).
-        circumference (float, optional): Pulley circumference in meters. If None, assumes 36-tooth GT2 pulley (0.072 m).
+        pulley_teeth (int): Number of teeth on the GT2 pulley. Default is 36.
+        belt_pitch_mm (float): Pitch of the GT2 belt in millimeters. Default is 2 mm.
+        steps_per_rev (int): Motor steps per full revolution. Default is 1600
+                            (1/8 microstepping on 200-step motor).
 
     Returns:
         tuple:
@@ -63,4 +66,5 @@ def linMotion(lin_data, times, pulley_teeth = 36, belt_pitch_mm = 2, steps_per_r
         else:
             delay_us = 0
         delay_times_us.append(delay_us)
+        
     return delta_steps, delay_times_us

@@ -3,12 +3,32 @@
 """
 Created on Thu Jul 17 10:51:42 2025
 
-@author: benjaminokoronkwo
+@author: benjaminokoronkwo, ChatGPT
 """
 
 import numpy as np
 
 def rotMotion(rot_data, times, steps_per_rev = 1600):
+    
+    """
+   Generates Arduino-ready step and delay arrays for rotational motion based on 
+   Blender-exported data.
+   
+   Process:
+   Applies sine easing to input motion, converts to motor steps, and 
+   calculates per-step delays to achieve smooth motion.
+
+   Args:
+       rot_data (list[float]): Raw position data in meters.
+       times (list[float]): Corresponding timestamps in seconds.
+       steps_per_rev (int): Number of motor steps per full 360° rotation.
+                           Default is 1600 (1/8 microstepping).
+
+   Returns:
+       tuple:
+           delta_steps (list[int]): Step differences between consecutive rotation values.
+           delay_times_us (list[int]): Delay per step in microseconds, suitable for Arduino step control.
+   """
     
     # === Apply Sine-Based Easing to Rotation if there's motion ===
     n = len(rot_data)
@@ -44,3 +64,5 @@ def rotMotion(rot_data, times, steps_per_rev = 1600):
     
         delta_steps.append(delta)
         delay_times_us.append(int(delay_per_step))
+        
+    return delta_steps, delay_times_us
