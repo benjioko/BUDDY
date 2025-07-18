@@ -4,62 +4,95 @@
 #define stepT  3    // Tilt-axis pins – choose any two free I/O pins
 #define dirT   2
 
-const int dataLength = 150;
-int deltaSteps[dataLength] = {
-  0, -1, -2, -3, -3, -4, -5, -6, -6, -7, -8, -8, -9, -10, -11, -11, -12, -13, -13, -14, -15, -16, -16, -16, -18, -18, -19, -19, -20, -20, -22, -21, -23, -22, -24, -24, -24, -26, -25, -26, -27, -27, -28, -28, -28, -29, -29, -30, -30, -31, -31, -31, -31, -32, -33, -32, -33, -33, -33, -34, -34, -34, -34, -35, -34, -35, -35, -35, -35, -35, -36, -35, -35, -36, -35, -36, -35, -36, -35, -35, -36, -35, -35, -35, -34, -35, -34, -35, -34, -34, -33, -34, -33, -33, -32, -32, -32, -32, -31, -31, -31, -30, -29, -30, -29, -28, -28, -28, -27, -26, -26, -26, -25, -25, -24, -23, -23, -22, -22, -21, -21, -20, -19, -19, -18, -17, -17, -16, -16, -14, -14, -14, -12, -12, -12, -10, -10, -9, -9, -8, -7, -6, -6, -4, -4, -4, -2, -2, -1, -1
+const int dataLength = 60;
+
+// --- linX axis ---
+int deltaStepsLin[dataLength] = {
+  -11, -32, -52, -70, -86, -101, -115, -127, -138, -146, -154, -160, -165, -167, -169, -169, -168, -165, -160, -154, -146, -138, -127, -114, -102, -86, -70, -52, -32, -11, 11, 32, 52, 70, 86, 102, 114, 127, 138, 146, 154, 160, 165, 168, 169, 169, 167, 165, 160, 154, 146, 138, 127, 115, 101, 86, 70, 52, 32, 11
 };
-unsigned int delayTimes[dataLength] = {
-  0, 41700, 20799, 13900, 13900, 10399, 8340, 6950, 6933, 5957, 5212, 5199, 4633, 4170, 3781, 3790, 3475, 3199, 3207, 2978, 2773, 2606, 2606, 2599, 2316, 2316, 2189, 2194, 2085, 2079, 1895, 1985, 1808, 1895, 1737, 1733, 1737, 1603, 1663, 1603, 1544, 1540, 1489, 1489, 1485, 1437, 1437, 1386, 1390, 1345, 1341, 1345, 1345, 1299, 1263, 1303, 1260, 1263, 1263, 1223, 1226, 1226, 1223, 1191, 1226, 1188, 1191, 1191, 1188, 1191, 1158, 1188, 1191, 1158, 1188, 1158, 1191, 1155, 1191, 1191, 1155, 1191, 1191, 1188, 1226, 1191, 1223, 1191, 1226, 1223, 1263, 1226, 1260, 1263, 1303, 1299, 1303, 1303, 1341, 1345, 1345, 1386, 1437, 1390, 1434, 1489, 1489, 1485, 1544, 1603, 1599, 1603, 1668, 1663, 1737, 1813, 1808, 1895, 1895, 1980, 1985, 2085, 2189, 2194, 2316, 2447, 2452, 2606, 2599, 2978, 2978, 2971, 3475, 3475, 3466, 4170, 4170, 4622, 4633, 5212, 5942, 6950, 6950, 10399, 10425, 10425, 20799, 20850, 41700, 41599
+unsigned int delayTimesLin[dataLength] = {
+  3790, 1299, 801, 595, 483, 412, 362, 327, 302, 285, 270, 260, 252, 249, 246, 246, 247, 252, 260, 270, 285, 302, 327, 365, 408, 483, 595, 801, 1299, 3790, 3790, 1299, 801, 595, 483, 408, 365, 327, 302, 285, 270, 260, 252, 247, 246, 246, 249, 252, 260, 270, 285, 302, 327, 362, 412, 483, 595, 801, 1299, 3790
 };
 
+// --- rotX axis ---
+int deltaStepsRot[dataLength] = {
+  -20, -20, -20, -19, -18, -17, -16, -15, -14, -12, -10, -8, -6, -4, -1, 0, 0, 1, 2, 4, 5, 8, 10, 13, 16, 19, 24, 28, 32, 38, 45, 53, 62, 66, 70, 72, -1528, 70, 66, 62, 53, 45, 35, 22, 7, -7, -20, -32, -42, -50, -58, -63, -68, 1529, -71, -71, -68, -65, -61, -53
+};
+unsigned int delayTimesRot[dataLength] = {
+  2085, 2079, 2085, 2194, 2311, 2452, 2606, 2773, 2978, 3475, 4159, 5212, 6950, 10399, 41700, 0, 0, 41700, 20850, 10399, 8340, 5212, 4159, 3207, 2606, 2189, 1737, 1489, 1299, 1097, 926, 784, 672, 631, 594, 579, 27, 594, 631, 672, 784, 926, 1191, 1890, 5957, 5957, 2079, 1303, 992, 831, 718, 661, 611, 27, 587, 585, 613, 641, 681, 786
+};
 
-int deltaStepsRot[dataLength] = {0};           // all zeros
-unsigned int delayTimesRot[dataLength] = {0};  // all zeros
+int currentIndexX = 0;
+int currentIndexT = 0;
 
+int stepsRemainingX = 0;
+int stepsRemainingT = 0;
 
-/* helper: one HIGH-LOW pulse */
-inline void pulse(int pin) {
-  digitalWrite(pin, HIGH);
-  digitalWrite(pin, LOW);
-}
+unsigned long lastStepTimeX = 0;
+unsigned long lastStepTimeT = 0;
+
+bool steppingX = false;
+bool steppingT = false;
 
 void setup() {
-  pinMode(stepX, OUTPUT);   pinMode(dirX, OUTPUT);
-  pinMode(stepT, OUTPUT);   pinMode(dirT, OUTPUT);
+  pinMode(stepX, OUTPUT);
+  pinMode(dirX, OUTPUT);
+  pinMode(stepT, OUTPUT);
+  pinMode(dirT, OUTPUT);
+
+  // Prime first motion segment
+  if (currentIndexX < dataLength) {
+    digitalWrite(dirX, deltaStepsLin[currentIndexX] >= 0 ? HIGH : LOW);
+    stepsRemainingX = abs(deltaStepsLin[currentIndexX]);
+    lastStepTimeX = micros();
+    steppingX = true;
+  }
+
+  if (currentIndexT < dataLength) {
+    digitalWrite(dirT, deltaStepsRot[currentIndexT] >= 0 ? HIGH : LOW);
+    stepsRemainingT = abs(deltaStepsRot[currentIndexT]);
+    lastStepTimeT = micros();
+    steppingT = true;
+  }
 }
 
 void loop() {
+  unsigned long now = micros();
 
-  for (int i = 0; i < dataLength; ++i) {
+  // --- LINEAR X AXIS ---
+  if (steppingX && stepsRemainingX > 0) {
+    if (now - lastStepTimeX >= delayTimesLin[currentIndexX]) {
+      digitalWrite(stepX, HIGH);
+      delayMicroseconds(2);  // Small pulse width
+      digitalWrite(stepX, LOW);
 
-    /* 1. set directions for this segment */
-    digitalWrite(dirX,  (deltaStepsLin[i]    >= 0) ? HIGH : LOW);
-    digitalWrite(dirT,  (deltaStepsRot[i] >= 0) ? HIGH : LOW);
-
-    /* 2. copy absolute step counts */
-    int nX = abs(deltaStepsLin[i]);
-    int nT = abs(deltaStepsRot[i]);
-
-    /* 3. interleave steps until both counts reach zero */
-    while (nX || nT) {
-
-      if (nX) {
-        pulse(stepX);
-        delayMicroseconds(delayTimesLin[i] / 2);
-        pulse(stepX);                       // second half of square wave
-        delayMicroseconds(delayTimesLin[i] / 2);
-        --nX;
-      }
-
-      if (nT) {
-        pulse(stepT);
-        delayMicroseconds(delayTimesRot[i] / 2);
-        pulse(stepT);
-        delayMicroseconds(delayTimesRot[i] / 2);
-        --nT;
-      }
+      lastStepTimeX = now;
+      stepsRemainingX--;
     }
+  } else if (steppingX && currentIndexX < dataLength - 1) {
+    currentIndexX++;
+    digitalWrite(dirX, deltaStepsLin[currentIndexX] >= 0 ? HIGH : LOW);
+    stepsRemainingX = abs(deltaStepsLin[currentIndexX]);
   }
 
-  while (true);   // finished – stay here
+  // --- ROTATION AXIS ---
+  if (steppingT && stepsRemainingT > 0) {
+    if (now - lastStepTimeT >= delayTimesRot[currentIndexT]) {
+      digitalWrite(stepT, HIGH);
+      delayMicroseconds(2);  // Small pulse width
+      digitalWrite(stepT, LOW);
+
+      lastStepTimeT = now;
+      stepsRemainingT--;
+    }
+  } else if (steppingT && currentIndexT < dataLength - 1) {
+    currentIndexT++;
+    digitalWrite(dirT, deltaStepsRot[currentIndexT] >= 0 ? HIGH : LOW);
+    stepsRemainingT = abs(deltaStepsRot[currentIndexT]);
+  }
+
+  // Stop condition
+  if (currentIndexX >= dataLength && currentIndexT >= dataLength) {
+    while (true); // Done
+  }
 }
