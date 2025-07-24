@@ -13,10 +13,10 @@ from rotMotion import rotMotion
 
 # === 1. FILE NAMING CONFIGURATION ===
 # (must contain a column labeled "X (m)")
-filepath = "/Users/benjaminokoronkwo/BUDDY/data/motion/tilt_x-axis_test5.csv"
+filepath = "/Users/benjaminokoronkwo/BUDDY/data/testing/captured/increments5_20.csv"
 
 # === OUTPUT FILE: Auto-generated .txt in /processed ===
-output_folder = "/Users/benjaminokoronkwo/BUDDY/data/processed"
+output_folder = "/Users/benjaminokoronkwo/BUDDY/data/testing/processed"
 os.makedirs(output_folder, exist_ok=True)
 
 # Strip .csv extension and optional '_data' suffix
@@ -47,7 +47,7 @@ with open(filepath, "r") as f:
 
 # === 4. RUN FUNCTIONS FOR EACH DOF ===
 results_by_dof = {
-    "linX": linMotion(lin_x, times_s),
+    #"linX": linMotion(lin_x, times_s),
     "rotX": rotMotion(rot_x, times_s)
 }
 
